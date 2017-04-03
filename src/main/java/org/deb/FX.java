@@ -15,6 +15,20 @@
  */
 package org.deb;
 
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.SepiaTone;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import java.util.Date;
 
 import javafx.application.Application;
@@ -46,18 +60,39 @@ public class FX extends Application {
 			primaryStage.setTitle("Hello Java FX!");
 		}
 		Button btn = new Button();
-		btn.setText("Say 'Hello Java FX'");
+		btn.setText("Say 'Time Now'");
+		Label timeLable = new Label("");
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 
+			
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println(new Date());
+				timeLable.setText(new Date().toString());
 			}
 		});
 
-		StackPane root = new StackPane();
-		root.getChildren().add(btn);
-		primaryStage.setScene(new Scene(root, 300, 250));
+		
+		final String[] viewOptions = new String[] { "Title", "Binomial name", "Picture", "Description" };
+
+		MenuBar menuBar = new MenuBar();
+		// --- Menu File
+		Menu menuFile = new Menu("File");
+		// --- Menu Edit
+		Menu menuEdit = new Menu("Edit");
+		// --- Menu View
+		Menu menuView = new Menu("View");
+		menuBar.getMenus().addAll(menuFile, menuEdit, menuView);
+		
+		
+		
+		Scene scene = new Scene(new VBox(), 400, 350); scene.setFill(Color.OLDLACE);
+//		root.getChildren().addAll(menuBar);
+		((VBox) scene.getRoot()).getChildren().addAll(menuBar);
+		
+		
+		((VBox) scene.getRoot()).getChildren().add(btn);
+		((VBox) scene.getRoot()).getChildren().add(timeLable);
+		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 }
